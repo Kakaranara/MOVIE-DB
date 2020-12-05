@@ -1,25 +1,180 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import clsx from 'clsx';
+import { makeStyles } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import InboxIcon from '@material-ui/icons/Inbox';
+import MenuIcon from '@material-ui/icons/Menu';
+import PersonIcon from '@material-ui/icons/Person';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 
-function App() {
+import { 
+  createMuiTheme, ThemeProvider, IconButton, Typography, Divider, 
+  Toolbar, List, ListItem, ListItemIcon, ListItemText, Drawer, AppBar
+} from '@material-ui/core';
+
+//import MoviesPage from './pages/Movies.js';
+import DataSearch from './pages/Search.js';
+import AboutUs from './pages/aboutUs.js';
+
+
+function App(){
+  const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+  var drawerStats = false;
+
+  const handleDrawer =()=> {
+    drawerStats = !drawerStats;
+    setOpen(drawerStats);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Router>
+      <ThemeProvider theme={font}> 
+        <Typography variant="h3">Movie DB</Typography>
+        <div className={classes.root}>
+          <CssBaseline />
+          <AppBar position="fixed" className={classes.appBar}>
+            <Toolbar>
+              <IconButton color="inherit" aria-label="open drawer" onClick={handleDrawer} edge="start" >
+                <MenuIcon />
+              </IconButton>
+              <Typography variant="h6" noWrap>Movie DB</Typography>
+            </Toolbar>
+          </AppBar>
+          <Drawer variant="permanent" className={clsx(classes.drawer, { [classes.drawerOpen]: open,[classes.drawerClose]: !open,})}
+            classes={{paper: clsx({[classes.drawerOpen]: open,[classes.drawerClose]: !open,})}}>
+            <Toolbar />
+            <div className={classes.drawerContainer}>
+              <List>
+                {/* <NavLink to="/"> */}
+                  <ListItem button key="Home">
+                    <ListItemIcon>{<PersonIcon />}</ListItemIcon>
+                    <ListItemText primary="Home" />
+                  </ListItem>
+                {/* </NavLink>   */}
+              </List>
+              <Divider />
+              <List>
+                {/* <NavLink to="/movies"> */}
+                  <ListItem button key="Movies">
+                      <ListItemIcon>{<InboxIcon />}</ListItemIcon>
+                      <ListItemText primary="Movies" />
+                  </ListItem>
+                {/* {</NavLink>} */}
+                {/* {<NavLink to="/tvshows">} */}
+                  <ListItem button key="TV Shows">
+                      <ListItemIcon>{<InboxIcon />}</ListItemIcon>
+                      <ListItemText primary="TV Shows" />
+                  </ListItem>
+                {/* {</NavLink>} */}
+                {/* {<NavLink to="/peoples">} */}
+                  <ListItem button key="Peoples">
+                      <ListItemIcon>{<InboxIcon />}</ListItemIcon>
+                      <ListItemText primary="Peoples" />
+                  </ListItem>
+                {/* {</NavLink>} */}
+              </List>
+              <Divider />
+              <List>
+                {/* <NavLink to="/aboutus"> */}
+                  <ListItem button key="About Us">
+                    <ListItemIcon>{<PersonIcon />}</ListItemIcon>
+                    <ListItemText primary="About Us" />
+                  </ListItem>
+                {/* </NavLink> */}
+              </List>
+            </div>
+          </Drawer>
+          
+          <main className={classes.content}>
+          {/* <main> tempat taruh elemen-elemen */}
+            {/* <MoviesPage/><br/> */}
+            <DataSearch/>
+            <br/>
+            
+            
+          </main>
+        </div>
+        {/* <Route exact path='/' component={App}/> 
+        <Route path='/aboutus' component={AboutUs}/> */}
+        {/*<Route path='/movies' component={}/> 
+        <Route path='/tvshows' component={}/>
+        <Route path='/peoples' component={}/>*/}
+        
+      </ThemeProvider>
+    </Router>
+  ); 
 }
 
+const font = createMuiTheme({
+  typography:{
+    fontFamily: [
+      'Work Sans', 
+      'Rubik',
+      'sans-serif'
+    ],
+  }
+});
+const drawerWidth = 240;
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+  },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+  },
+  appBarShift: {
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  hide: {
+    display: 'none',
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+    whiteSpace: 'nowrap',
+  },
+  drawerOpen: {
+    width: drawerWidth,
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  drawerClose: {
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    overflowX: 'hidden',
+    width: theme.spacing(7) + 1,
+    [theme.breakpoints.up('sm')]: {
+      width: theme.spacing(9) + 1,
+    },
+  },
+  toolbar: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+  },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3),
+  },
+}));
+
 export default App;
+
