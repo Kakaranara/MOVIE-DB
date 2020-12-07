@@ -1,0 +1,14 @@
+.grid{
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.root{
+    flex-grow: 1;
+}
+
+.paper{
+    padding: 2px;
+    text-align: center;
+}
