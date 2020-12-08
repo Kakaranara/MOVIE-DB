@@ -6,37 +6,31 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import InboxIcon from '@material-ui/icons/Inbox';
 import MenuIcon from '@material-ui/icons/Menu';
 import PersonIcon from '@material-ui/icons/Person';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 
-import {
-  createMuiTheme, ThemeProvider, IconButton, Typography, Divider,
+import { 
+  createMuiTheme, ThemeProvider, IconButton, Typography, Divider, 
   Toolbar, List, ListItem, ListItemIcon, ListItemText, Drawer, AppBar
 } from '@material-ui/core';
 
 //import MoviesPage from './pages/Movies.js';
 import DataSearch from './pages/Search.js';
 import AboutUs from './pages/aboutUs.js';
-import Movies from './pages/Movies.js';
 
 
-function App() {
+function App(){
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   var drawerStats = false;
 
-  const handleDrawer = () => {
+  const handleDrawer =()=> {
     drawerStats = !drawerStats;
     setOpen(drawerStats);
   };
 
-  const linkStyle = { //baru
-    color: 'black',
-    textDecoration: 'none'
-  }
-
   return (
     <Router>
-      <ThemeProvider theme={font}>
+      <ThemeProvider theme={font}> 
         <Typography variant="h3">Movie DB</Typography>
         <div className={classes.root}>
           <CssBaseline />
@@ -48,79 +42,75 @@ function App() {
               <Typography variant="h6" noWrap>Movie DB</Typography>
             </Toolbar>
           </AppBar>
-          <Drawer variant="permanent" className={clsx(classes.drawer, { [classes.drawerOpen]: open, [classes.drawerClose]: !open, })}
-            classes={{ paper: clsx({ [classes.drawerOpen]: open, [classes.drawerClose]: !open, }) }}>
+          <Drawer variant="permanent" className={clsx(classes.drawer, { [classes.drawerOpen]: open,[classes.drawerClose]: !open,})}
+            classes={{paper: clsx({[classes.drawerOpen]: open,[classes.drawerClose]: !open,})}}>
             <Toolbar />
             <div className={classes.drawerContainer}>
               <List>
-                {/* LINK TO HOME */}
-                <Link to='/' style={linkStyle}>
+                {/* <NavLink to="/"> */}
                   <ListItem button key="Home">
                     <ListItemIcon>{<PersonIcon />}</ListItemIcon>
                     <ListItemText primary="Home" />
                   </ListItem>
-                </Link>
+                {/* </NavLink>   */}
               </List>
               <Divider />
               <List>
-                {/* LINK TO MOVIES */}
-                <Link to='/movies' style={linkStyle}>
+                {/* <NavLink to="/movies"> */}
                   <ListItem button key="Movies">
-                    <ListItemIcon>{<InboxIcon />}</ListItemIcon>
-                    <ListItemText primary="Movies" />
+                      <ListItemIcon>{<InboxIcon />}</ListItemIcon>
+                      <ListItemText primary="Movies" />
                   </ListItem>
-                </Link>
-                {/* LINK TO TV-SHOWS */}
-                <Link to='/tv-shows' style={linkStyle}>
-                <ListItem button key="TV Shows">
-                  <ListItemIcon>{<InboxIcon />}</ListItemIcon>
-                  <ListItemText primary="TV Shows" />
-                </ListItem>
-                </Link>
-               {/* LINK TO PEOPLES */}
-               <Link to='/peoples' style={linkStyle}>  
-                <ListItem button key="Peoples">
-                  <ListItemIcon>{<InboxIcon />}</ListItemIcon>
-                  <ListItemText primary="Peoples" />
-                </ListItem>
-               </Link>
+                {/* {</NavLink>} */}
+                {/* {<NavLink to="/tvshows">} */}
+                  <ListItem button key="TV Shows">
+                      <ListItemIcon>{<InboxIcon />}</ListItemIcon>
+                      <ListItemText primary="TV Shows" />
+                  </ListItem>
+                {/* {</NavLink>} */}
+                {/* {<NavLink to="/peoples">} */}
+                  <ListItem button key="Peoples">
+                      <ListItemIcon>{<InboxIcon />}</ListItemIcon>
+                      <ListItemText primary="Peoples" />
+                  </ListItem>
+                {/* {</NavLink>} */}
               </List>
               <Divider />
               <List>
-                {/* LINK TO ABOUT US */}
-                <Link to='/aboutUs' style={linkStyle}>
+                {/* <NavLink to="/aboutus"> */}
                   <ListItem button key="About Us">
                     <ListItemIcon>{<PersonIcon />}</ListItemIcon>
                     <ListItemText primary="About Us" />
                   </ListItem>
-                </Link>
+                {/* </NavLink> */}
               </List>
             </div>
           </Drawer>
-
-
-
+          
           <main className={classes.content}>
-            {/* <main> tempat taruh elemen-elemen */}
-            <br />
-            <Switch>
-              <Route path='/' exact component={DataSearch} />
-              <Route path='/aboutUs' component={AboutUs} />
-              <Route path='/movies' component={Movies} />a
-           </Switch>
+          {/* <main> tempat taruh elemen-elemen */}
+            {/* <MoviesPage/><br/> */}
+            <DataSearch/>
+            <br/>
+            
+            
           </main>
         </div>
+        {/* <Route exact path='/' component={App}/> 
+        <Route path='/aboutus' component={AboutUs}/> */}
+        {/*<Route path='/movies' component={}/> 
+        <Route path='/tvshows' component={}/>
+        <Route path='/peoples' component={}/>*/}
+        
       </ThemeProvider>
     </Router>
-
-
-  );
+  ); 
 }
 
 const font = createMuiTheme({
-  typography: {
+  typography:{
     fontFamily: [
-      'Work Sans',
+      'Work Sans', 
       'Rubik',
       'sans-serif'
     ],
