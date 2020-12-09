@@ -20,7 +20,7 @@ export default class dataSearch extends Component {
         .then(data => data.json())
         .then(data => {
             console.log(data);
-            this.setState({movies: [...data.results]})
+            this.setState({movies: [...data.results],pageL: data.total_pages})
         })
     }
 
@@ -28,11 +28,15 @@ export default class dataSearch extends Component {
         this.setState({searchTerm: e.target.value})
     }
 
+    // handlePage = (e) =>{
+    //     this.setState({pageLeng: e.target.value})
+    // }
+
     render(){
         return(
             <div>
                 <Nav1 handleSubmit={this.handleSubmit} handleChange={this.handleChange}/>
-                <MovieList movies={this.state.movies} />
+                <MovieList movies={this.state.movies} pageL={this.state.pageL}/>
             </div>
         );
     }
