@@ -1,13 +1,16 @@
 import React, {Component} from 'react';
 import Nav1 from '../components/Nav1';
 import MovieList from '../components/MovieList';
+import Pagination from '../components/Pagination';
 
 export default class dataSearch extends Component {
     constructor(){
         super()
         this.state = {
             movies: [],
-            searchTerm:''
+            searchTerm:'',
+            pageL: 0,
+            CurPage: 1
         }
         this.apiKey='c2be14dd7e9184f7bace4a34ed07a444'
         //process.env.REACT_APP_API
@@ -20,7 +23,7 @@ export default class dataSearch extends Component {
         .then(data => data.json())
         .then(data => {
             console.log(data);
-            this.setState({movies: [...data.results],pageL: data.total_pages})
+            this.setState({movies: [...data.results], pageL: data.total_results})
         })
     }
 
@@ -28,15 +31,22 @@ export default class dataSearch extends Component {
         this.setState({searchTerm: e.target.value})
     }
 
-    // handlePage = (e) =>{
-    //     this.setState({pageLeng: e.target.value})
-    // }
+    nextPage = (pageNumber) =>{ 
+        fetch(`https://api.themoviedb.org/3/search/movie?api_key=${this.apiKey}&query=${this.state.searchTerm}&page=${pageNumber}`)
+        .then(data => data.json())
+        .then(data => {
+            console.log(data);
+            this.setState({movies: [...data.results], CurPage: pageNumber})
+        })
+    }
 
     render(){
+        const numberPages = Math.floor(this.state.pageL / 20)
         return(
             <div>
                 <Nav1 handleSubmit={this.handleSubmit} handleChange={this.handleChange}/>
-                <MovieList movies={this.state.movies} pageL={this.state.pageL}/>
+                <MovieList movies={this.state.movies}/>
+                { this.state.pageL > 20 ? <Pagination pages={numberPages} nextPage={this.nextPage} CurPage={this.state.CurPage} /> : ''}
             </div>
         );
     }
