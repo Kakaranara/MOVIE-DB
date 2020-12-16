@@ -26,7 +26,8 @@ const Movie = (props) =>{
         <CardMedia className={classes.media}>
             {
             props.image == null ? <img src={`https://www.atlantawatershed.org/wp-content/uploads/2017/06/default-placeholder.png`}
-            style={{width: "300px", height : 300}}/> : <img src={`http://image.tmdb.org/t/p/w185${props.image}`}
+            alt=""
+            style={{width: "300px", height : 300}}/> : <img src={`http://image.tmdb.org/t/p/w185${props.image}`} alt=""
             style={{width: "300px", height : 300}}/>
             }
         </CardMedia>

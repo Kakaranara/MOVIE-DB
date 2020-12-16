@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    Grid, Box
+    Grid
 } from '@material-ui/core';
 import ProfileCards from '../components/profileCards'
 
@@ -29,10 +29,13 @@ class About extends React.Component{
     
     render(){
         const user = this.state;
+        const cardStyle = {
+            marginBottom:'150px'
+        }
         return(
-            <Box textAlign="center">
+            <div align="center">
                 <Grid container direction="column" justify="center" alignItems="center">
-                    <Grid container item md spacing={1}>
+                    <Grid container item spacing={1} style={cardStyle}>
                         <Grid item md={6}>
                             <ProfileCards nama={user.wahyu.nama} nim={user.wahyu.nim}/>
                         </Grid>
@@ -49,7 +52,7 @@ class About extends React.Component{
                         </Grid>
                     </Grid>
                 </Grid>
-            </Box>
+            </div>
         );
     }
 }
