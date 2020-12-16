@@ -28,11 +28,12 @@ export default class dataSearch extends Component {
 
     handleChange = (e) =>{
         this.setState({searchTerm: e.target.value});
+        if(e.target.value !== ""){
         fetch(`https://api.themoviedb.org/3/search/movie?api_key=${this.apiKey}&query=${e.target.value}`)
         .then(data => data.json())
         .then(data => {
             this.setState({movies: [...data.results]})
-        })
+        })}
     }
 
     nextPage = (pageNumber) =>{ 
