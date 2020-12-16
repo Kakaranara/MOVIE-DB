@@ -13,7 +13,6 @@ import {
   Toolbar, List, ListItem, ListItemIcon, ListItemText, Drawer, AppBar
 } from '@material-ui/core';
 
-//import MoviesPage from './pages/Movies.js';
 import DataSearch from './pages/Search.js';
 import AboutUs from './pages/aboutUs.js';
 import Movies from './pages/Movies.js';
@@ -100,8 +99,6 @@ function App() {
 
 
           <main className={classes.content}>
-            {/* <main> tempat taruh elemen-elemen */}
-            {/* <MoviesPage/><br/> */}
             <br />
             <Switch>
               <Route path='/' exact component={DataSearch} />
