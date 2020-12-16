@@ -1,16 +1,17 @@
 import React from 'react';
+import {TextField} from '@material-ui/core';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 const Nav1 = (props) =>{
     return(
-        <div className="container-search">
-            <div className="row">
-                <form action='' onSubmit={props.handleSubmit}>
-                    <div className="search-input" >
-                        <input placeholder="Search Movie" type="text" onChange={props.handleChange}/>
-                    </div>
-                </form>
-            </div>
-        </div>
+        <form action='' onSubmit={props.handleSubmit}>
+            <Autocomplete
+                options={props.movies}
+                getOptionLabel={(movies) => movies.title}
+                renderInput={(params) => 
+                    <TextField {...params} label="Search" onChange={props.handleChange}/>}
+            />
+        </form>
     )
 }
 

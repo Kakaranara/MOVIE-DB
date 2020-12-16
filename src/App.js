@@ -46,7 +46,7 @@ function App() {
               <IconButton color="inherit" aria-label="open drawer" onClick={handleDrawer} edge="start" >
                 <MenuIcon />
               </IconButton>
-              <Typography variant="h6" noWrap>Movie DB</Typography>
+              <Typography variant="h6" noWrap>MOVIE DB</Typography>
             </Toolbar>
           </AppBar>
           <Drawer variant="permanent" className={clsx(classes.drawer, { [classes.drawerOpen]: open, [classes.drawerClose]: !open, })}
