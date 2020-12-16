@@ -47,6 +47,8 @@ class About extends React.Component{
         };
     }
     
+// err
+
     render(){
         const user = this.state;
         const cardStyle = {
