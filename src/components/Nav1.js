@@ -1,18 +1,41 @@
 import React from 'react';
-import {TextField} from '@material-ui/core';
+import {TextField, Box} from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
-const Nav1 = (props) =>{
-    return(
-        <form action='' onSubmit={props.handleSubmit}>
-            <Autocomplete
-                options={props.movies}
-                getOptionLabel={(movies) => movies.title}
-                renderInput={(params) => 
-                    <TextField {...params} label="Search" onChange={props.handleChange}/>}
-            />
-        </form>
-    )
-}
+export default function Grouped(props) {
+    const options = props.movies.map((option) => {
+        const firstLetter = option.title[0].toUpperCase();
+        return {
+          firstLetter: /[0-9]/.test(firstLetter) ? '0-9' : firstLetter,
+          ...option,
+        };
+    });
 
-export default Nav1;
+    const keyPress = function(e){
+        if(e.keyCode === 13){
+           props.handleSubmit(e);
+        }
+     }
+
+    return (
+      <Autocomplete
+        options={options.sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter))}
+        groupBy={(option) => option.firstLetter}
+        value={TextField.value}
+        getOptionLabel={(option) => option.title}
+        getOptionSelected={(option, value) => option.iso === value.iso}
+        inputValue={TextField.value}
+        onInputChange={props.handleSubmit}
+        onKeyDown={keyPress}
+        autoHighlight={true}
+        autoSelect={false}
+        fullWidth={true}
+        onClick={props.handleSubmit}
+        renderInput={(params) => 
+            <Box marginBottom={3}>
+                <TextField {...params} label="Search" onChange={props.handleSubmit} onKeyDown={keyPress}/>
+            </Box>
+        }
+      />
+    );
+}
