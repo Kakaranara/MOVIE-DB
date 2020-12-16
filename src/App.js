@@ -109,7 +109,7 @@ function App() {
               <Route path='/' exact component={DataSearch} />
               <Route path='/aboutUs' component={AboutUs} />
               <Route path='/movies' component={Movies} />a
-           </Switch>
+            </Switch>
           </main>
         </div>
 

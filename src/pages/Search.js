@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Nav1 from '../components/Nav1';
 import MovieList from '../components/MovieList';
 import Pagination from '../components/Pagination';
+import MovieInfo from '../components/MovieInfo';
 
 export default class dataSearch extends Component {
     constructor(){
@@ -10,7 +11,8 @@ export default class dataSearch extends Component {
             movies: [],
             searchTerm:'',
             pageL: 0,
-            CurPage: 1
+            CurPage: 1,
+            CurMovie: null
         }
         this.apiKey='c2be14dd7e9184f7bace4a34ed07a444'
         //process.env.REACT_APP_API
@@ -44,12 +46,26 @@ export default class dataSearch extends Component {
         })
     }
 
+    viewMovieInfo = (id) =>{
+        const FMovie = this.state.movies.filter(movie => movie.id === id);
+        const newCurMovie = FMovie.length > 0? FMovie[0] : null;
+        this.setState({ CurMovie: newCurMovie})
+    }
+
+    clodeMovieInfo = () =>{
+        this.setState({ CurMovie: null })
+    }
+
     render(){
         const numberPages = Math.floor(this.state.pageL / 20)
         return(
             <div>
-                <Nav1 movies={this.state.movies} handleSubmit={this.handleSubmit} handleChange={this.handleChange}/>
-                <MovieList movies={this.state.movies}/>
+                { this.state.CurMovie == null ?
+                <div>
+                    <Nav1 movies={this.state.movies} handleSubmit={this.handleSubmit} handleChange={this.handleChange}/>
+                    <MovieList viewMovieInfo={this.viewMovieInfo} movies={this.state.movies}/> 
+                </div> :<MovieInfo CurMovie={this.state.CurMovie} closeMovieInfo={this.clodeMovieInfo} />
+                }
                 { this.state.pageL > 20 ? <Pagination pages={numberPages} nextPage={this.nextPage} CurPage={this.state.CurPage} /> : ''}
             </div>
         );

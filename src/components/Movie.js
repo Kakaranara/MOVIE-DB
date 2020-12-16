@@ -21,8 +21,8 @@ const Movie = (props) =>{
     const classes = useStyles();
     return(
         <div>
-        <Card className={classes.root}>
         <CardActionArea>
+        <Card className={classes.root} onClick={() => props.viewMovieInfo(props.movieID)}>
         <CardMedia className={classes.media}>
             {
             props.image == null ? <img src={`https://www.atlantawatershed.org/wp-content/uploads/2017/06/default-placeholder.png`}
@@ -39,8 +39,8 @@ const Movie = (props) =>{
             {props.title}
             </Typography>
         </CardContent>
-        </CardActionArea>
         </Card>
+        </CardActionArea>
         </div>
     );
 }
