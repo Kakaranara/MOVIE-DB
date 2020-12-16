@@ -9,6 +9,7 @@ export default class dataSearch extends Component {
         super()
         this.state = {
             movies: [],
+            movies1: [],
             searchTerm:'',
             pageL: 0,
             CurPage: 1,
@@ -23,12 +24,29 @@ export default class dataSearch extends Component {
         this.setState({
             searchTerm: e.target.value
         });
+        console.log(e.target.value);
         if(e.target.value !== ""){
             fetch(`https://api.themoviedb.org/3/search/movie?api_key=${this.apiKey}&query=${e.target.value}`)
             .then(data => data.json())
             .then(data => {
                 this.setState({movies: [...data.results], pageL: data.total_results})
         })}
+        
+    }
+
+    handleChange = (e) =>{
+        e.preventDefault();
+        this.setState({
+            searchTerm: e.target.value
+        });
+        console.log(e.target.value);
+        if(e.target.value !== ""){
+            fetch(`https://api.themoviedb.org/3/search/movie?api_key=${this.apiKey}&query=${e.target.value}`)
+            .then(data => data.json())
+            .then(data => {
+                this.setState({movies1: [...data.results]})
+        })}
+        
     }
 
     nextPage = (pageNumber) =>{ 
@@ -55,11 +73,11 @@ export default class dataSearch extends Component {
             <div>
                 { this.state.CurMovie == null ?
                 <div>
-                    <Nav1 movies={this.state.movies} handleSubmit={this.handleSubmit} handleChange={this.handleChange}/>
+                    <Nav1 movies1={this.state.movies1} handleSubmit={this.handleSubmit} handleChange={this.handleChange}/>
                     <MovieList viewMovieInfo={this.viewMovieInfo} movies={this.state.movies}/> 
+                    { this.state.pageL > 20 ? <Pagination pages={numberPages} nextPage={this.nextPage} CurPage={this.state.CurPage} /> : ''}
                 </div> :<MovieInfo CurMovie={this.state.CurMovie} closeMovieInfo={this.clodeMovieInfo} />
                 }
-                { this.state.pageL > 20 ? <Pagination pages={numberPages} nextPage={this.nextPage} CurPage={this.state.CurPage} /> : ''}
             </div>
         );
     }
