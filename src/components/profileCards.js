@@ -8,6 +8,7 @@ import {
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
+    maxHeight: 1000,
   },
 });
 
@@ -20,8 +21,8 @@ export default function ProfileCard(props) {
         <CardMedia
           component="img"
           alt="Contemplative Reptile"
-          height="140"
-          image="https://miro.medium.com/max/776/1*Lad06lrjlU9UZgSTHUoyfA.png"
+          height="300"
+          image="https://picsum.photos/250/500"
           title="Contemplative Reptile"
         />
         <CardContent>
@@ -29,9 +30,7 @@ export default function ProfileCard(props) {
             {props.nama} <br/> <div style={{fontSize:16,color:"gray"}}>({props.nim})</div>
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-            across all continents except Antarctica
-            {/* {props.quotes} */}
+            {props.quote}
           </Typography>
         </CardContent>
       </CardActionArea>
