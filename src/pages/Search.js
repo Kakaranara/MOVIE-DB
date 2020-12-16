@@ -22,20 +22,23 @@ export default class dataSearch extends Component {
         fetch(`https://api.themoviedb.org/3/search/movie?api_key=${this.apiKey}&query=${this.state.searchTerm}`)
         .then(data => data.json())
         .then(data => {
-            console.log(data);
             this.setState({movies: [...data.results], pageL: data.total_results})
         })
     }
 
     handleChange = (e) =>{
-        this.setState({searchTerm: e.target.value})
+        this.setState({searchTerm: e.target.value});
+        fetch(`https://api.themoviedb.org/3/search/movie?api_key=${this.apiKey}&query=${e.target.value}`)
+        .then(data => data.json())
+        .then(data => {
+            this.setState({movies: [...data.results]})
+        })
     }
 
     nextPage = (pageNumber) =>{ 
         fetch(`https://api.themoviedb.org/3/search/movie?api_key=${this.apiKey}&query=${this.state.searchTerm}&page=${pageNumber}`)
         .then(data => data.json())
         .then(data => {
-            console.log(data);
             this.setState({movies: [...data.results], CurPage: pageNumber})
         })
     }
@@ -44,7 +47,7 @@ export default class dataSearch extends Component {
         const numberPages = Math.floor(this.state.pageL / 20)
         return(
             <div>
-                <Nav1 handleSubmit={this.handleSubmit} handleChange={this.handleChange}/>
+                <Nav1 movies={this.state.movies} handleSubmit={this.handleSubmit} handleChange={this.handleChange}/>
                 <MovieList movies={this.state.movies}/>
                 { this.state.pageL > 20 ? <Pagination pages={numberPages} nextPage={this.nextPage} CurPage={this.state.CurPage} /> : ''}
             </div>
