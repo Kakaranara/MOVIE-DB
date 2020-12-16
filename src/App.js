@@ -18,8 +18,6 @@ import DataSearch from './pages/Search.js';
 import AboutUs from './pages/aboutUs.js';
 import Movies from './pages/Movies.js';
 
-
-
 function App() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
