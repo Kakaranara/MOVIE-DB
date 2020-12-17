@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import PeopleCard from '../components/PeopleCard'
-import { Grid } from '@material-ui/core'
+import { Grid, Typography } from '@material-ui/core'
 
 const apiKey = "c2be14dd7e9184f7bace4a34ed07a444";
 
@@ -25,14 +25,14 @@ export default class Peoples extends React.Component {
     render() {
         return (
             <div>
-                <h1>Orang Terpopuler</h1>
+                <Typography variant="h3" align="center" gutterBottom>Orang Terpopuler</Typography>
                 <Grid container spacing={1} justify="center">
                         {this.state.data.map(data =>
-                        <Grid item md={4} key={data.id}>
+                        <Grid item md={2} xs={4} key={data.id}>
                             <PeopleCard 
-                            nama={data.name} 
-                            image={data.profile_path}
-                            popular={data.popularity}    
+                                nama={data.name} 
+                                image={data.profile_path}
+                                popular={data.popularity}    
                             />
                         </Grid>
                         )}

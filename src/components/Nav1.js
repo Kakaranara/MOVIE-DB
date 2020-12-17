@@ -27,7 +27,7 @@ export default function Grouped(props) {
         inputValue={TextField.value}
         onInputChange={props.handleChange}
         onKeyDown={keyPress}
-        //autoHighlight={true}
+        autoHighlight={false}
         autoSelect={false}
         fullWidth={true}
         onClick={props.handleSubmit}

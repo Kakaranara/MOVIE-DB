@@ -57,8 +57,8 @@ function Item(props)
                 {
                     props.image == null ? <img src={`https://www.atlantawatershed.org/wp-content/uploads/2017/06/default-placeholder.png`}
                         alt=""
-                        style={{ width: "100%", height: 450 }} /> : <img src={`http://image.tmdb.org/t/p/w500${props.image}`} alt=""
-                            style={{ width: "100%", height: 450 }} />
+                        style={{ width: "100%"}} /> : <img src={`http://image.tmdb.org/t/p/w500${props.image}`} alt=""
+                            style={{ width: "100%"}} />
                 }
             </CardMedia>
         </Card>

@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
     root: {
-        maxWidth: 300,
+        maxWidth: 200,
         height: 450,
         margin: 10
     },
@@ -20,24 +20,24 @@ const useStyles = makeStyles({
 const PeopleCard = (props) => {
     const classes = useStyles();
     return (
-            <CardActionArea>
-                <Card className={classes.root}>
+            <CardActionArea className={classes.root}>
+                <Card>
                     <CardMedia className={classes.media}>
                         {
                             props.image == null ? <img src={`https://www.atlantawatershed.org/wp-content/uploads/2017/06/default-placeholder.png`}alt=""
-                                style={{ width: "300px", height: 300 }} /> : <img src={`http://image.tmdb.org/t/p/w185${props.image}`} alt=""
-                                    style={{ width: "300px", height: 300 }} />
+                                style={{ height: 300 }} /> : <img src={`http://image.tmdb.org/t/p/w185${props.image}`} alt=""
+                                    style={{ height: 300 }} />
                         }
                     </CardMedia>
                     <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">
+                        <Typography gutterBottom variant="h5" component="h2" style={{height: 90, maxHeight: 90, textAlign: "center"}}>
                             {props.nama}
                         </Typography>
                         <Typography 
-                        gutterBottom 
-                        variant="h5" 
-                        component="h3" 
-                        style={{color:'silver',fontSize:18}}
+                            gutterBottom 
+                            variant="body1" 
+                            component="h3" 
+                            style={{color:'#9c9c9c'}}    
                         >
                             Popularity : {props.popular}
                         </Typography>

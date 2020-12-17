@@ -1,43 +1,45 @@
 import React from 'react';
-import Card from '@material-ui/core/Card';
 import { makeStyles } from '@material-ui/core/styles';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Typography from '@material-ui/core/Typography';
+import {
+    Card, CardActionArea, CardContent, CardMedia, Typography
+} from '@material-ui/core';
+import Moment from 'moment';
+import DefaultImg from '../assets/default-placeholder.png';
 
 const useStyles = makeStyles({
     root: {
-        maxWidth: 300,
-        height: 450,
-        margin: 10
+        maxWidth: 250,
+        height: 525,
+        margin: 10,
+        borderRadius: 15,
     },
     media: {
-        height: 300,
+        height: 375,
     },
+    popularity: {
+        float: "right",
+    }
 });
 
-const Movie = (props) => {
+const Movie = (props) =>{
     const classes = useStyles();
-    return (
+    return(
         <div>
             <CardActionArea>
                 <Card className={classes.root} onClick={() => props.viewMovieInfo(props.movieID)}>
                     <CardMedia className={classes.media}>
                         {
-                            props.image == null ? <img src={`https://www.atlantawatershed.org/wp-content/uploads/2017/06/default-placeholder.png`}
-                                alt=""
-                                style={{ width: "300px", height: 300 }} /> : <img src={`http://image.tmdb.org/t/p/w185${props.image}`} alt=""
-                                    style={{ width: "300px", height: 300 }} />
+                        props.image == null ? 
+                        <img src={DefaultImg}
+                            alt="" style={{height: 375, maxHeight: 375}}/> : 
+                        <img src={`http://image.tmdb.org/t/p/w185${props.image}`} alt="" style={{height: 375, maxHeight: 375}}/>
                         }
                     </CardMedia>
                     <CardContent>
-                        <Typography gutterBottom variant="h6" component="h2" style={{ fontSize: 12, color: "gray" }}>
-                            {props.date}
+                        <Typography gutterBottom variant="caption" style={{fontSize: 12,color: "gray"}}>
+                            {Moment(props.date).format("MMM D, YYYY")}
                         </Typography>
-                        <Typography gutterBottom variant="h5" component="h2">
-                            {props.title}
-                        </Typography>
+                        <Typography align="center" gutterBottom variant="h6" style={{height: 100, maxHeight: 100}}>{props.title}</Typography>
                     </CardContent>
                 </Card>
             </CardActionArea>
