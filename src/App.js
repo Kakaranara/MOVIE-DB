@@ -16,7 +16,6 @@ import {
 import DataSearch from './pages/Search.js';
 import AboutUs from './pages/aboutUs.js';
 import Movies from './pages/Movies.js';
-import Peoples from './pages/Peoples.js';
 
 function App() {
   const classes = useStyles();
@@ -105,7 +104,6 @@ function App() {
               <Route path='/' exact component={DataSearch} />
               <Route path='/aboutUs' component={AboutUs} />
               <Route path='/movies' component={Movies} />
-              <Route path='/peoples' component={Peoples}/>
             </Switch>
           </main>
         </div>
