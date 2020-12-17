@@ -3,6 +3,8 @@ import {
     Grid
 } from '@material-ui/core';
 import ProfileCards from '../components/profileCards'
+import fotoVeren from '../assets/veren.png'
+import fotoFeiza from '../assets/feiza.png'
 
 class About extends React.Component{
     constructor(props){
@@ -15,16 +17,16 @@ class About extends React.Component{
                     src: '',
                     alt: 'img profile wahyu'
                 },
-                quote:'Saya suka masak piano dan coding'
+                quote:'Yang paling penting itu jadi diri sendiri, jgn dengerin kata negatif orang. sama sekali gak guna.'
             },
             veren: {
                 nama : 'Veren Valensia',
                 nim : '00000040923',
                 img: {
-                    src: '',
+                    src: fotoVeren,
                     alt: 'img profile veren'
                 },
-                quote:'saya suka game fps dan juga koding saya jago'
+                quote:"It was nice when I acted like an adult, but I don't wanna change, even if they say I'm immature."
             },
             vincent : {
                 nama : 'Vincent Christopher',
@@ -39,10 +41,10 @@ class About extends React.Component{
                 nama: 'Feiza Joane',
                 nim: '00000040118',
                 img: {
-                    src: '',
+                    src: fotoFeiza,
                     alt: 'img profile feiza'
                 },
-                quote:'saya suka bermusik dan juga suka masak'
+                quote:"Here's a fact: Video Games Don't make us VIOLENT, LAG does :)"
             }
         };
     }
@@ -63,6 +65,8 @@ class About extends React.Component{
                             nama={user.wahyu.nama} 
                             nim={user.wahyu.nim} 
                             quote={user.wahyu.quote}
+                            gambar={user.wahyu.img.src}
+                            lod={user.wahyu.img.alt}
                             />
                         </Grid>
                         <Grid item md={6} style={cardStyle}>
@@ -70,6 +74,8 @@ class About extends React.Component{
                             nama={user.veren.nama} 
                             nim={user.veren.nim} 
                             quote={user.veren.quote}
+                            gambar={user.veren.img.src}
+                            lod={user.veren.img.alt}                        
                             />
                         </Grid>
                     </Grid>
@@ -79,6 +85,8 @@ class About extends React.Component{
                             nama={user.vincent.nama} 
                             nim={user.vincent.nim} 
                             quote={user.vincent.quote}
+                            gambar={user.vincent.img.src}
+                            lod={user.vincent.img.alt}
                             />
                         </Grid>
                         <Grid item md={6} style={cardStyle}>
@@ -86,6 +94,8 @@ class About extends React.Component{
                             nama={user.feiza.nama} 
                             nim={user.feiza.nim} 
                             quote={user.feiza.quote}
+                            gambar={user.feiza.img.src}
+                            lod={user.feiza.img.alt}
                             />
                         </Grid>
                     </Grid>

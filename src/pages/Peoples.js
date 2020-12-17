@@ -25,10 +25,10 @@ export default class Peoples extends React.Component {
         return (
             <div>
                 <h1>Orang Terpopuler</h1>
-                <Grid container spacing={0}>
+                <Grid container spacing={1}>
                         {this.state.data.map(data =>
-                        <Grid item xs={4}>
-                            <PeopleCard key={data.id} nama={data.name} image={data.profile_path} />
+                        <Grid item md={4}>
+                            <PeopleCard key={data.id} nama={data.name} image={data.profile_path}    />
                         </Grid>
                         )}
                 </Grid>

@@ -20,10 +20,10 @@ export default function ProfileCard(props) {
       <CardActionArea>
         <CardMedia
           component="img"
-          alt="Contemplative Reptile"
+          alt={props.lod}
           height="300"
-          image="https://picsum.photos/250/500"
-          title="Contemplative Reptile"
+          image={props.gambar}
+          title="About Us"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
