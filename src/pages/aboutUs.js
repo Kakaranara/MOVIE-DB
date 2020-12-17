@@ -5,6 +5,8 @@ import {
 import ProfileCards from '../components/profileCards'
 import fotoVeren from '../assets/veren.png'
 import fotoFeiza from '../assets/feiza.png'
+import fotoKoco  from '../assets/koco.jpg'
+import fotoVincent from '../assets/vincent.jpg'
 
 class About extends React.Component{
     constructor(props){
@@ -14,7 +16,7 @@ class About extends React.Component{
                 nama: 'Wahyu Koco Permadi',
                 nim : '00000040112',
                 img: {
-                    src: '',
+                    src: fotoKoco,
                     alt: 'img profile wahyu'
                 },
                 quote:'Yang paling penting itu jadi diri sendiri, jgn dengerin kata negatif orang. sama sekali gak guna.'
@@ -32,7 +34,7 @@ class About extends React.Component{
                 nama : 'Vincent Christopher',
                 nim : '00000040754',
                 img: {
-                    src: '',
+                    src: fotoVincent,
                     alt: 'img profile vincent'
                 },
                 quote:'Semua Hal Tidak Akan Berjalan Dengan Lancar'

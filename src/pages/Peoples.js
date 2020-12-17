@@ -18,17 +18,22 @@ export default class Peoples extends React.Component {
                 })
                 console.log(this.state.data)
             })
-            .catch(console.error)
+            .catch(console.error)   
     }
+
 
     render() {
         return (
             <div>
                 <h1>Orang Terpopuler</h1>
-                <Grid container spacing={1}>
+                <Grid container spacing={1} justify="center">
                         {this.state.data.map(data =>
-                        <Grid item md={4}>
-                            <PeopleCard key={data.id} nama={data.name} image={data.profile_path}    />
+                        <Grid item md={4} key={data.id}>
+                            <PeopleCard 
+                            nama={data.name} 
+                            image={data.profile_path}
+                            popular={data.popularity}    
+                            />
                         </Grid>
                         )}
                 </Grid>

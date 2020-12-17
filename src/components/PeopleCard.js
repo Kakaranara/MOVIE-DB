@@ -33,6 +33,14 @@ const PeopleCard = (props) => {
                         <Typography gutterBottom variant="h5" component="h2">
                             {props.nama}
                         </Typography>
+                        <Typography 
+                        gutterBottom 
+                        variant="h5" 
+                        component="h3" 
+                        style={{color:'silver',fontSize:18}}
+                        >
+                            Popularity : {props.popular}
+                        </Typography>
                     </CardContent>
                 </Card>
             </CardActionArea>

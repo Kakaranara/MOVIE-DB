@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 import {
-  Card, CardActionArea, CardActions, CardContent, CardMedia, Button, Typography
+  Card, CardActionArea, CardContent, CardMedia, Typography
 } from '@material-ui/core/';
 
 const useStyles = makeStyles({
@@ -14,7 +14,7 @@ const useStyles = makeStyles({
 
 export default function ProfileCard(props) {
   const classes = useStyles();
-
+  
   return (
     <Card className={classes.root}>
       <CardActionArea>
@@ -34,11 +34,6 @@ export default function ProfileCard(props) {
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          Share
-        </Button>
-      </CardActions>
     </Card>
   );
 }
