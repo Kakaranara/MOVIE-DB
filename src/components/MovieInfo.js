@@ -150,7 +150,7 @@ const MovieInfo = (props) =>{
                                 <Typography variant="h5" style={{fontWeight:600}} gutterBottom align="center">Production Companies</Typography>
                                 <br/>
                             </Grid>
-                            <Grid container item xs={12} direction="column" spacing={2} justify="center" alignItems="center">
+                            <Grid container item xs={12} direction="row" spacing={2} justify="center" alignItems="center">
                                 {
                                     movie.production_companies.map((production, index) =>{
                                         return(
