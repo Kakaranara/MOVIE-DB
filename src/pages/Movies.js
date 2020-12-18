@@ -148,8 +148,8 @@ export default class myComponent extends React.Component {
 										<MenuItem value={2}>Least Popular</MenuItem>
 										<MenuItem value={3}>Newest Movie</MenuItem>
 										<MenuItem value={4}>Oldest Movie</MenuItem>
-                    <MenuItem value={5}>Top Rated</MenuItem>
-                    <MenuItem value={6}>Under Rated</MenuItem>
+										<MenuItem value={5}>Highest Rating</MenuItem>
+										<MenuItem value={6}>Lowest Rating</MenuItem>
 									</Select>
 								</FormControl>
 							</Grid>

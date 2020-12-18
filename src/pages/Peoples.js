@@ -16,7 +16,6 @@ export default class Peoples extends React.Component {
                 this.setState({
                     data: result.data.results
                 })
-                console.log(this.state.data)
             })
             .catch(console.error)   
     }

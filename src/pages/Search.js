@@ -105,7 +105,6 @@ export default class dataSearch extends Component {
                 this.setState({
                     movies2: result.data.results
                 })
-                console.log(this.state.movies2);
             })
             .catch(console.error)
 
@@ -114,7 +113,6 @@ export default class dataSearch extends Component {
                 this.setState({
                     movies3: result.data.results
                 })
-                console.log(this.state.movies3);
             })
             .catch(console.error)
     }

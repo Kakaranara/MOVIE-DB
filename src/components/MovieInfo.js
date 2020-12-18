@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState}  from 'react'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {
     Avatar, Box, Chip, Container, Typography, Button, Grid, 
@@ -6,46 +6,48 @@ import {
 } from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
 import HeartIcon from '../assets/heart.svg';
-import { makeStyles } from '@material-ui/core/styles';
 import Moment from 'moment';
 import DefaultImg from '../assets/default-placeholder.png';
-
-const useStyles = makeStyles({
-    cover: {
-        width: "100%",
-    },
-});
+import axios from 'axios';
 
 const MovieInfo = (props) =>{
     const movie = props.CurMovie;
     const review = props.CurMovieReviews;
-    const classes = useStyles(props);
     let duration = movie.runtime;
-    let date = movie.release_date
+    let date = movie.release_date;
+    
+    const [count, setCount] = useState('');
+
+    const SearchVideo = (id) => {
+        axios.get(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=c2be14dd7e9184f7bace4a34ed07a444&language=en-US`)
+            .then(result => {
+                setCount(result.data.results[0].key); 
+            })
+            .catch(console.error)
+    }
 
     return(
         <Container>
-            <Button onClick={props.closeMovieInfo} style={{marginTop: -50}}>
-                <ArrowBackIcon/>Go Back
-            </Button>
+                <Button onClick={props.closeMovieInfo} style={{marginTop: -50}}>
+                    <ArrowBackIcon/>Go Back
+                </Button>
             <Card>
                 <Box style={{
-                    backgroundImage: `URL(http://image.tmdb.org/t/p/original${movie.backdrop_path}`,
+                    backgroundImage: `URL(http://image.tmdb.org/t/p/w500${movie.backdrop_path}`,
                     backgroundRepeat: 'no-repeat',
                     backgroundSize: 'cover',
                     backgroundPosition: 'top',
                     height: 500,
-                    display: movie.backdrop_path != null ? "block" : "none"
-                }}/> 
+                    display: movie.backdrop_path != null ? "block" : "none",
+                }}/>
                 <CardContent>
                 <Grid container direction="column" style={{padding: 50}}>
                     <Grid container item direction="row" justify="center" spacing={5}>
                         <Grid item lg={3} sm={6} md={4} xs={10}>
                         { 
                             props.CurMovie.poster_path == null ? 
-                            <img src={DefaultImg} alt="" className={classes.cover}/> :
-                            <img src={`http://image.tmdb.org/t/p/w500${movie.poster_path}`} alt="" 
-                                className={classes.cover} style={{marginTop: movie.backdrop_path !== null ? "-100%" : 0}}/>
+                            <img src={DefaultImg} alt="" style={{width: '100%'}}/> :
+                            <img src={`http://image.tmdb.org/t/p/w500${movie.poster_path}`} alt="" style={{marginTop: movie.backdrop_path !== null ? "-100%" : 0, width: "100%"}}/>
                         }
                         <Grid container item xs={12} lg={12} direction="row" justify="center" alignItems="center" spacing={1} style={{marginTop: 15}}>
                             {
@@ -58,8 +60,8 @@ const MovieInfo = (props) =>{
                                 })
                             }
                         </Grid>
-                        </Grid>
-                        <Grid item lg={9} xs={12} className={classes.title}>
+                    </Grid>
+                        <Grid item lg={9} xs={12}>
                             <Typography variant="h3"><b>{movie.title}</b> ({Moment(date).format('YYYY')})</Typography>
                             <Typography variant="h6" gutterBottom><i>{movie.tagline}</i></Typography>
                             <Typography variant="subtitle2" gutterBottom>
@@ -83,28 +85,38 @@ const MovieInfo = (props) =>{
                     </Grid>
                 </Grid>
                 </CardContent>
+                <hr/>
+                <CardContent>
+                    <Grid container item direction="column" justify="center" alignItems="center" spacing={3}>
+                        <Grid item xs={12}>
+                            <Typography variant="h5" align="center" style={{fontWeight: 600}}>Trailer</Typography>
+                        </Grid>
+                        <Grid item xs={12} style={{textAlign: "center"}}>
+                            <Item SearchVideo={SearchVideo(movie.id)} count={count}/>
+                        </Grid>
+                    </Grid>
+                </CardContent>
                 {
                     (review != null && review !== undefined && review !== '' && review.length) ?
                     <>
                         <hr/>
                         <CardContent>
-                            
-                            <Grid container style={{paddingLeft: 50, paddingRight: 50, paddingBottom: 20}} flexdirection="column" alignItems="center" justify="center">
+                            <Grid container spacing={3} style={{paddingLeft: 50, paddingRight: 50, paddingBottom: 20}} direction="column" alignItems="center" justify="center">
                                 <Grid item xs={12}>
                                     <Typography variant="h5" style={{fontWeight:600}} align="center">Reviews</Typography>
                                     <br/>
                                 </Grid>
-                                <Grid container item xs={12} flexdirection="column" spacing={5} justify="center" alignItems="center">
+                                <Grid container item xs={12} direction="column" spacing={5} justify="center" alignItems="center">
                                     {
                                         review.map((review, index) =>{
                                             return(
-                                                <Grid container item key={index} xs={12} spacing={1} flexdirection="row" justify="center">
-                                                    <Grid container item xs={12} sm={12} md={3} lg={2} spacing={1} flexdirection="row" justify="center" alignItems="center">
+                                                <Grid container item key={index} xs={12} spacing={1} direction="row" justify="center">
+                                                    <Grid container item xs={12} sm={12} md={3} lg={2} spacing={1} direction="row" justify="center" alignItems="center">
                                                         <Grid item lg={3} md={3}>
                                                             {
                                                                 review.avatar_path == null ? 
-                                                                <Avatar className={classes.large} alt="" src="https://www.atlantawatershed.org/wp-content/uploads/2017/06/default-placeholder.png"/> :
-                                                                <Avatar className={classes.large} src={`http://image.tmdb.org/t/p/185${review.author_details.avatar_path}`} alt="" style={{maxWidth: '50%', marginTop: "auto", marginBottom: "auto"}}/>
+                                                                <Avatar alt="" src="https://www.atlantawatershed.org/wp-content/uploads/2017/06/default-placeholder.png"/> :
+                                                                <Avatar src={`http://image.tmdb.org/t/p/185${review.author_details.avatar_path}`} alt="" style={{maxWidth: '50%', marginTop: "auto", marginBottom: "auto"}}/>
                                                             }
                                                         </Grid>
                                                         <Grid container item xs={12} sm={12} lg={9} md={9} justify="center" alignItems="center">
@@ -133,16 +145,16 @@ const MovieInfo = (props) =>{
                     <>
                     <hr/>
                     <CardContent>
-                        <Grid container style={{paddingLeft: 50, paddingRight: 50, paddingBottom: 20}} flexdirection="row" alignItems="center" justify="center">
+                        <Grid container spacing={3} style={{paddingLeft: 50, paddingRight: 50, paddingBottom: 20}} direction="row" alignItems="center" justify="center">
                             <Grid item xs={12}>
                                 <Typography variant="h5" style={{fontWeight:600}} gutterBottom align="center">Production Companies</Typography>
                                 <br/>
                             </Grid>
-                            <Grid container item xs={12} flexdirection="column" spacing={2} justify="center" alignItems="center">
+                            <Grid container item xs={12} direction="column" spacing={2} justify="center" alignItems="center">
                                 {
                                     movie.production_companies.map((production, index) =>{
                                         return(
-                                            <Grid container item key={index} xs={12} md={6} lg={4} flexdirection="row" alignItems="center" justify="center">
+                                            <Grid container item key={index} xs={12} md={6} lg={4} direction="row" alignItems="center" justify="center">
                                                 <Grid item xs={12} style={{textAlign: "center"}}>
                                                     {
                                                         production.logo_path == null ? 
@@ -160,11 +172,16 @@ const MovieInfo = (props) =>{
                             </Grid>
                         </Grid>
                     </CardContent>
-                    </>
-                    : ''
+                    </> : ''
                 }
             </Card>
         </Container>
+    )
+}
+
+function Item(props){
+    return (
+        <iframe width="420" height="240" title={`title${props.count}`} src={`https://www.youtube.com/embed/${props.count}?autoplay=0`}/>
     )
 }
 
