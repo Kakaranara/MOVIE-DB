@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Nav1 from '../components/Nav1';
 import MovieList from '../components/MovieList';
+import MovieList1 from '../components/MovieList1';
 import Pagination from '../components/Pagination';
 import MovieInfo from '../components/MovieInfo';
 import Carousel1 from '../components/Carousel1';
@@ -13,6 +14,7 @@ export default class dataSearch extends Component {
             movies: [],
             movies1: [],
             movies2: [],
+            movies3: [],
             searchTerm:'',
             pageL: 0,
             CurPage: 1,
@@ -69,8 +71,18 @@ export default class dataSearch extends Component {
         })
     }
 
+    
     viewMovieInfo1 = (id) =>{
         const FMovie = this.state.movies2.filter(movie => movie.id === id);
+        fetch(`https://api.themoviedb.org/3/movie/${FMovie[0].id}?api_key=${this.apiKey}&language=en-US`)
+        .then(data => data.json())
+        .then(data => {
+            this.setState({CurMovie: data})
+        })
+    }
+    
+    viewMovieInfo2 = (id) =>{
+        const FMovie = this.state.movies3.filter(movie => movie.id === id);
         fetch(`https://api.themoviedb.org/3/movie/${FMovie[0].id}?api_key=${this.apiKey}&language=en-US`)
         .then(data => data.json())
         .then(data => {
@@ -88,6 +100,16 @@ export default class dataSearch extends Component {
                 this.setState({
                     movies2: result.data.results
                 })
+                console.log(this.state.movies2);
+            })
+            .catch(console.error)
+
+        axios.get(`https://api.themoviedb.org/3/movie/now_playing?api_key=${this.apiKey}&language=en-US&page=1`)
+            .then(result => {
+                this.setState({
+                    movies3: result.data.results
+                })
+                console.log(this.state.movies3);
             })
             .catch(console.error)
     }
@@ -100,7 +122,8 @@ export default class dataSearch extends Component {
                 { this.state.CurMovie === null ?
                 <div>
                     <Nav1 movies1={this.state.movies1} handleSubmit={this.handleSubmit} handleChange={this.handleChange}/>
-                    {this.state.CurStatus === null ? <Carousel1 movies2={this.state.movies2} viewMovieInfo={this.viewMovieInfo1}/> : null}
+                    {this.state.CurStatus === null ? <div><Carousel1 movies2={this.state.movies2} viewMovieInfo={this.viewMovieInfo1}/> 
+                    <MovieList1 viewMovieInfo={this.viewMovieInfo2} movies3={this.state.movies3}/> </div> : null}
                     <MovieList viewMovieInfo={this.viewMovieInfo} movies={this.state.movies}/> 
                     { this.state.pageL > 20 ? <Pagination pages={numberPages} nextPage={this.nextPage} CurPage={this.state.CurPage} /> : ''}
                 </div> :<MovieInfo CurMovie={this.state.CurMovie} closeMovieInfo={this.clodeMovieInfo} />
