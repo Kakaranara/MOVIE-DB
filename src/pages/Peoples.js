@@ -28,7 +28,7 @@ export default class Peoples extends React.Component {
                 <Typography variant="h3" align="center" gutterBottom>Orang Terpopuler</Typography>
                 <Grid container spacing={1} justify="center">
                         {this.state.data.map(data =>
-                        <Grid item md={2} xs={4} key={data.id}>
+                        <Grid item md={3} xs={12} sm={6} lg={2} key={data.id} style={{marginBottom:'15px'}}>
                             <PeopleCard 
                                 nama={data.name} 
                                 image={data.profile_path}
