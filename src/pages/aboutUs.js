@@ -37,7 +37,7 @@ class About extends React.Component{
                     src: fotoVincent,
                     alt: 'img profile vincent'
                 },
-                quote:'Semua hal tidak akan berjalan dengan lancar'
+                quote:'Time is precious but so are you, do what you have to do with all your heart or DONT DO IT!!!'
             },
             feiza: {
                 nama: 'Feiza Joane',

@@ -1,7 +1,7 @@
 import React from 'react';
-import MovieList from '../components/MovieList';
+import MovieList from '../components/MovieListX';
 import Pagination from '../components/Pagination';
-import MovieInfo from '../components/MovieInfo';
+import MovieInfo from '../components/MovieInfoX';
 import Nav1 from '../components/Nav1';
 import {FormControl, Grid, InputLabel, Select, MenuItem} from '@material-ui/core';
 export default class myComponent extends React.Component {
@@ -15,8 +15,8 @@ export default class myComponent extends React.Component {
 			CurMovie: null,
 			CurStatus: null,
 			CurMovieReviews: null,
-      sortBy: 1,
-      Unext: 1
+            sortBy: 1,
+            Unext: 1
 		}
 		this.apiKey='c2be14dd7e9184f7bace4a34ed07a444'
 	}
@@ -27,7 +27,7 @@ export default class myComponent extends React.Component {
             searchTerm: e.target.value
         });
         if(e.target.value !== ""){
-            fetch(`https://api.themoviedb.org/3/search/movie?api_key=${this.apiKey}&query=${e.target.value}`)
+            fetch(`https://api.themoviedb.org/3/search/tv?api_key=${this.apiKey}&language=en-US&page=1&query=${e.target.value}&include_adult=false`)
             .then(data => data.json())
             .then(data => {
                 this.setState({movies: [...data.results], pageL: data.total_results, CurStatus: data.total_results})
@@ -35,22 +35,22 @@ export default class myComponent extends React.Component {
             
     }
 
-  handleChange = (e) =>{
-      e.preventDefault();
-      this.setState({
-          searchTerm: e.target.value
-      });
-      if(e.target.value !== ""){
-          fetch(`https://api.themoviedb.org/3/search/movie?api_key=${this.apiKey}&query=${e.target.value}`)
-          .then(data => data.json())
-          .then(data => {
-              this.setState({movies1: [...data.results]})
-      })}
-      
-  }
+handleChange = (e) =>{
+    e.preventDefault();
+    this.setState({
+        searchTerm: e.target.value
+    });
+    if(e.target.value !== ""){
+        fetch(`https://api.themoviedb.org/3/search/movie?api_key=${this.apiKey}&query=${e.target.value}`)
+        .then(data => data.json())
+        .then(data => {
+            this.setState({movies1: [...data.results]})
+    })}
+    
+}
 
 	componentDidMount() {
-		let apiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${this.apiKey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`;
+		let apiUrl = `https://api.themoviedb.org/3/discover/tv?api_key=${this.apiKey}&language=en-US&sort_by=popularity.desc&page=1&timezone=America%2FNew_York&include_null_first_air_dates=false`;
 		fetch(apiUrl)
 		.then((response) => response.json())
 		.then((data) => 
@@ -61,22 +61,22 @@ export default class myComponent extends React.Component {
     let apiUrl;
     console.log(this.state.Unext)
     if(this.state.Unext === 1){
-      apiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${this.apiKey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${pageNumber}`;
+        apiUrl = `https://api.themoviedb.org/3/discover/tv?api_key=${this.apiKey}&language=en-US&sort_by=popularity.desc&page=${pageNumber}&timezone=America%2FNew_York&include_null_first_air_dates=false`;
 		}
 		else if(this.state.Unext === 2){
-      apiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${this.apiKey}&language=en-US&sort_by=popularity.asc&include_adult=false&include_video=false&page=${pageNumber}`;
+        apiUrl = `https://api.themoviedb.org/3/discover/tv?api_key=${this.apiKey}&language=en-US&sort_by=popularity.asc&page=${pageNumber}&timezone=America%2FNew_York&include_null_first_air_dates=false`;
     }
     else if(this.state.Unext === 3){
-      apiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${this.apiKey}&language=en-US&sort_by=release_date.desc&include_adult=false&include_video=false&page=${pageNumber}`;
+        apiUrl = `https://api.themoviedb.org/3/discover/tv?api_key=${this.apiKey}&language=en-US&sort_by=first_air_date.desc&page=${pageNumber}&timezone=America%2FNew_York&include_null_first_air_dates=false`;
     }
     else if(this.state.Unext === 4){
-      apiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${this.apiKey}&language=en-US&sort_by=release_date.asc&include_adult=false&include_video=false&page=${pageNumber}`;
+        apiUrl = `https://api.themoviedb.org/3/discover/tv?api_key=${this.apiKey}&language=en-US&sort_by=first_air_date.asc&page=${pageNumber}&timezone=America%2FNew_York&include_null_first_air_dates=false`;
     }
     else if(this.state.Unext === 5){
-      apiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${this.apiKey}&language=en-US&sort_by=vote_average.desc&include_adult=false&include_video=false&page=${pageNumber}`;
+        apiUrl = `https://api.themoviedb.org/3/discover/tv?api_key=${this.apiKey}&language=en-US&sort_by=vote_average.desc&page=${pageNumber}&timezone=America%2FNew_York&include_null_first_air_dates=false`;
     }
     else if(this.state.Unext === 6){
-      apiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${this.apiKey}&language=en-US&sort_by=vote_average.asc&include_adult=false&include_video=false&page=${pageNumber}`;
+        apiUrl = `https://api.themoviedb.org/3/discover/tv?api_key=${this.apiKey}&language=en-US&sort_by=vote_average.asc&page=${pageNumber}&timezone=America%2FNew_York&include_null_first_air_dates=false`;
 		}
         fetch(apiUrl)
         .then(data => data.json())
@@ -87,16 +87,16 @@ export default class myComponent extends React.Component {
 
 	viewMovieInfo = (id) =>{
 		const FMovie = this.state.movies.filter(movie => movie.id === id);
-		fetch(`https://api.themoviedb.org/3/movie/${FMovie[0].id}?api_key=${this.apiKey}&language=en-US`)
+		fetch(`https://api.themoviedb.org/3/tv/${FMovie[0].id}?api_key=${this.apiKey}&language=en-US`)
 		.then(data => data.json())
 		.then(data => {
 			this.setState({CurMovie: data})
 		})
 		
-		fetch(`https://api.themoviedb.org/3/movie/${FMovie[0].id}/reviews?api_key=${this.apiKey}&language=en-US`)
+		fetch(`https://api.themoviedb.org/3/tv/${FMovie[0].id}/reviews?api_key=${this.apiKey}&language=en-US`)
     .then(data => data.json())
     .then(data => {
-      this.setState({CurMovieReviews: [...data.results]})})
+        this.setState({CurMovieReviews: [...data.results]})})
 	}
 
 	clodeMovieInfo = () =>{
@@ -105,23 +105,23 @@ export default class myComponent extends React.Component {
 
 	handleSortChange =(e)=>{
     let apiUrl;
-		if(e.target.value === 1){
-      apiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${this.apiKey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`;
+	if(e.target.value === 1){
+        apiUrl = `https://api.themoviedb.org/3/discover/tv?api_key=${this.apiKey}&language=en-US&sort_by=popularity.desc&page=1&timezone=America%2FNew_York&include_null_first_air_dates=false`;
 		}
-		else if(e.target.value === 2){
-      apiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${this.apiKey}&language=en-US&sort_by=popularity.asc&include_adult=false&include_video=false&page=1`;
+	else if(e.target.value === 2){
+        apiUrl = `https://api.themoviedb.org/3/discover/tv?api_key=${this.apiKey}&language=en-US&sort_by=popularity.asc&page=1&timezone=America%2FNew_York&include_null_first_air_dates=false`;
     }
     else if(e.target.value === 3){
-      apiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${this.apiKey}&language=en-US&sort_by=release_date.desc&include_adult=false&include_video=false&page=1`;
+        apiUrl = `https://api.themoviedb.org/3/discover/tv?api_key=${this.apiKey}&language=en-US&sort_by=first_air_date.desc&page=1&timezone=America%2FNew_York&include_null_first_air_dates=false`;
     }
     else if(e.target.value === 4){
-      apiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${this.apiKey}&language=en-US&sort_by=release_date.asc&include_adult=false&include_video=false&page=1`;
+        apiUrl = `https://api.themoviedb.org/3/discover/tv?api_key=${this.apiKey}&language=en-US&sort_by=first_air_date.asc&page=1&timezone=America%2FNew_York&include_null_first_air_dates=false`;
     }
     else if(e.target.value === 5){
-      apiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${this.apiKey}&language=en-US&sort_by=vote_average.desc&include_adult=false&include_video=false&page=1`;
+        apiUrl = `https://api.themoviedb.org/3/discover/tv?api_key=${this.apiKey}&language=en-US&sort_by=vote_average.desc&page=1&timezone=America%2FNew_York&include_null_first_air_dates=false`;
     }
     else if(e.target.value === 6){
-      apiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${this.apiKey}&language=en-US&sort_by=vote_average.asc&include_adult=false&include_video=false&page=1`;
+        apiUrl = `https://api.themoviedb.org/3/discover/tv?api_key=${this.apiKey}&language=en-US&sort_by=vote_average.asc&page=1&timezone=America%2FNew_York&include_null_first_air_dates=false`;
 		}
 		fetch(apiUrl)
 		.then((response) => response.json())
@@ -129,7 +129,7 @@ export default class myComponent extends React.Component {
     this.setState({movies: [...data.results], pageL: data.total_results, CurStatus: data.total_results, Unext: e.target.value, sortBy: e.target.value}))
     
 	}
-  
+
 	render() {
 		const numberPages = Math.floor((this.state.pageL / 20)-1)
 		return(

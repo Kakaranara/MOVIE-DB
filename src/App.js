@@ -20,6 +20,7 @@ import DataSearch from './pages/Search.js';
 import AboutUs from './pages/aboutUs.js';
 import Movies from './pages/Movies.js';
 import Peoples from './pages/Peoples.js';
+import TVShows from './pages/TVShows.js';
 
 function App() {
   const classes = useStyles();
@@ -73,10 +74,10 @@ function App() {
                   </ListItem>
                 </Link>
                 {/* LINK TO TV-SHOWS */}
-                <Link to='/tv-shows' style={linkStyle}>
-                  <ListItem button key="TV Shows">
+                <Link to='/tvshows' style={linkStyle}>
+                  <ListItem button key="TVShows">
                     <ListItemIcon>{<TvIcon />}</ListItemIcon>
-                    <ListItemText primary="TV Shows" />
+                    <ListItemText primary="TVShows" />
                   </ListItem>
                 </Link>
                 {/* LINK TO PEOPLES */}
@@ -108,6 +109,7 @@ function App() {
               <Route path='/' exact component={DataSearch} />
               <Route path='/aboutUs' component={AboutUs} />
               <Route path='/movies' component={Movies} />
+              <Route path='/tvshows' component={TVShows} />
               <Route path='/peoples' component={Peoples}/>
             </Switch>
           </main>
