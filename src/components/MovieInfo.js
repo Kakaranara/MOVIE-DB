@@ -86,16 +86,16 @@ const MovieInfo = (props) =>{
                 </CardContent>
                 <hr/>
                 <CardContent>
-                    <Grid container style={{paddingLeft: 50, paddingRight: 50, paddingBottom: 20}} flexDirection="row" alignItems="center" justify="center">
+                    <Grid container style={{paddingLeft: 50, paddingRight: 50, paddingBottom: 20}} flexdirection="row" alignItems="center" justify="center">
                         <Grid item xs={12}>
                             <Typography variant="h5" style={{fontWeight:600}} align="center">Production Companies</Typography>
                             <br/>
                         </Grid>
-                        <Grid container item xs={12} flexDirection="column" spacing={2} justify="center" alignItems="center">
+                        <Grid container item xs={12} flexdirection="column" spacing={2} justify="center" alignItems="center">
                             {
                                 movie.production_companies.map((production, index) =>{
                                     return(
-                                        <Grid container item key={index} xs={12} md={6} lg={4} flexDirection="row" alignItems="center" justify="center">
+                                        <Grid container item key={index} xs={12} md={6} lg={4} flexdirection="row" alignItems="center" justify="center">
                                             <Grid item xs={12} style={{textAlign: "center"}}>
                                                 {
                                                     production.logo_path == null ? 

@@ -70,8 +70,11 @@ export default class dataSearch extends Component {
 
     viewMovieInfo1 = (id) =>{
         const FMovie = this.state.movies2.filter(movie => movie.id === id);
-        const newCurMovie = FMovie.length > 0? FMovie[0] : null;
-        this.setState({ CurMovie: newCurMovie})
+        fetch(`https://api.themoviedb.org/3/movie/${FMovie[0].id}?api_key=${this.apiKey}&language=en-US`)
+        .then(data => data.json())
+        .then(data => {
+            this.setState({CurMovie: data})
+        })
     }
 
     clodeMovieInfo = () =>{

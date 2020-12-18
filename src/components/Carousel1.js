@@ -9,7 +9,7 @@ import walpaper from '../assets/walpaper.jpg'
 
 const useStyles = makeStyles({
     root: {
-        maxWidth: 1000,
+        maxWidth: 300,
         height: 450,
         margin: 10
     },
@@ -20,7 +20,6 @@ const useStyles = makeStyles({
 
 function Carousel1(props)
 {
-    const classes = useStyles();
     //console.log(props);
     return (
         <div style={{backgroundImage: `url(${(walpaper)})`}}>
