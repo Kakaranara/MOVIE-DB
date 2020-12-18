@@ -30,10 +30,9 @@ export default function Grouped(props) {
         autoHighlight={false}
         autoSelect={false}
         fullWidth={true}
-        onClick={props.handleSubmit}
         renderInput={(params) => 
             <Box marginBottom={3}>
-                <TextField {...params} label="Search" onClick={props.handleSubmit} onKeyDown={keyPress}/>
+                <TextField {...params} label="Search"  onKeyDown={keyPress}/>
             </Box>
         }
     />

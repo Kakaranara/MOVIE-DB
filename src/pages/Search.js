@@ -16,7 +16,8 @@ export default class dataSearch extends Component {
             searchTerm:'',
             pageL: 0,
             CurPage: 1,
-            CurMovie: null
+            CurMovie: null,
+            CurStatus: null
         }
         this.apiKey='c2be14dd7e9184f7bace4a34ed07a444'
         //process.env.REACT_APP_API
@@ -27,14 +28,14 @@ export default class dataSearch extends Component {
         this.setState({
             searchTerm: e.target.value
         });
-        console.log(e.target.value);
+        console.log("fine");
         if(e.target.value !== ""){
             fetch(`https://api.themoviedb.org/3/search/movie?api_key=${this.apiKey}&query=${e.target.value}`)
             .then(data => data.json())
             .then(data => {
-                this.setState({movies: [...data.results], pageL: data.total_results})
-        })}
-        
+                this.setState({movies: [...data.results], pageL: data.total_results, CurStatus: data.total_results})
+            })}
+            
     }
 
     handleChange = (e) =>{
@@ -78,7 +79,7 @@ export default class dataSearch extends Component {
     }
 
     clodeMovieInfo = () =>{
-        this.setState({ CurMovie: null })
+        this.setState({ CurMovie: null})
     }
 
     componentDidMount() {
@@ -99,7 +100,7 @@ export default class dataSearch extends Component {
                 { this.state.CurMovie === null ?
                 <div>
                     <Nav1 movies1={this.state.movies1} handleSubmit={this.handleSubmit} handleChange={this.handleChange}/>
-                    <Carousel1 movies2={this.state.movies2} viewMovieInfo={this.viewMovieInfo1}/>
+                    {this.state.CurStatus === null ? <Carousel1 movies2={this.state.movies2} viewMovieInfo={this.viewMovieInfo1}/> : null}
                     <MovieList viewMovieInfo={this.viewMovieInfo} movies={this.state.movies}/> 
                     { this.state.pageL > 20 ? <Pagination pages={numberPages} nextPage={this.nextPage} CurPage={this.state.CurPage} /> : ''}
                 </div> :<MovieInfo CurMovie={this.state.CurMovie} closeMovieInfo={this.clodeMovieInfo} />
