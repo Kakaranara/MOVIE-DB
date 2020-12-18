@@ -19,7 +19,7 @@ class About extends React.Component{
                     src: fotoKoco,
                     alt: 'img profile wahyu'
                 },
-                quote:'Yang paling penting itu jadi diri sendiri, jgn dengerin kata negatif orang. sama sekali gak guna.'
+                quote:'Yang paling penting itu jadi diri sendiri, jangan dengerin kata negatif orang. Sama sekali gak guna.'
             },
             veren: {
                 nama : 'Veren Valensia',
@@ -37,7 +37,7 @@ class About extends React.Component{
                     src: fotoVincent,
                     alt: 'img profile vincent'
                 },
-                quote:'Time is precious but so are you, do what you have to do with all your heart or DONT DO IT!!!'
+                quote:'Semua hal tidak akan berjalan dengan lancar'
             },
             feiza: {
                 nama: 'Feiza Joane',
@@ -56,13 +56,13 @@ class About extends React.Component{
     render(){
         const user = this.state;
         const cardStyle = {
-            marginBottom:'150px'
+            marginBottom:'10px'
         }
         return(
             <div align="center" >
                 <Grid container direction="column" justify="center" alignItems="center">
                     <Grid container item spacing={1} >
-                        <Grid item md={6} style={cardStyle}>
+                        <Grid item md={6} sm={12} style={cardStyle}>
                             <ProfileCards 
                             nama={user.wahyu.nama} 
                             nim={user.wahyu.nim} 
@@ -71,7 +71,7 @@ class About extends React.Component{
                             lod={user.wahyu.img.alt}
                             />
                         </Grid>
-                        <Grid item md={6} style={cardStyle}>
+                        <Grid item md={6} sm={12} style={cardStyle}>
                             <ProfileCards  
                             nama={user.veren.nama} 
                             nim={user.veren.nim} 
@@ -82,7 +82,7 @@ class About extends React.Component{
                         </Grid>
                     </Grid>
                     <Grid container item md spacing={1}>
-                        <Grid item md={6} style={cardStyle}>
+                        <Grid item md={6} sm={12} style={cardStyle}>
                             <ProfileCards 
                             nama={user.vincent.nama} 
                             nim={user.vincent.nim} 
@@ -91,7 +91,7 @@ class About extends React.Component{
                             lod={user.vincent.img.alt}
                             />
                         </Grid>
-                        <Grid item md={6} style={cardStyle}>
+                        <Grid item md={6} sm={12} style={cardStyle}>
                             <ProfileCards 
                             nama={user.feiza.nama} 
                             nim={user.feiza.nim} 

@@ -19,7 +19,8 @@ export default class dataSearch extends Component {
             pageL: 0,
             CurPage: 1,
             CurMovie: null,
-            CurStatus: null
+            CurStatus: null,
+            CurMovieReviews: null,
         }
         this.apiKey='c2be14dd7e9184f7bace4a34ed07a444'
         //process.env.REACT_APP_API
@@ -69,6 +70,10 @@ export default class dataSearch extends Component {
         .then(data => {
             this.setState({CurMovie: data})
         })
+        fetch(`https://api.themoviedb.org/3/movie/${FMovie[0].id}/reviews?api_key=${this.apiKey}&language=en-US`)
+        .then(data => data.json())
+        .then(data => {
+            this.setState({CurMovieReviews: [...data.results]})})
     }
 
     
@@ -90,8 +95,8 @@ export default class dataSearch extends Component {
         })
     }
 
-    clodeMovieInfo = () =>{
-        this.setState({ CurMovie: null})
+    closeMovieInfo = () =>{
+        this.setState({ CurMovie: null, CurMovieReviews: null})
     }
 
     componentDidMount() {
@@ -126,7 +131,7 @@ export default class dataSearch extends Component {
                     <MovieList1 viewMovieInfo={this.viewMovieInfo2} movies3={this.state.movies3}/> </div> : null}
                     <MovieList viewMovieInfo={this.viewMovieInfo} movies={this.state.movies}/> 
                     { this.state.pageL > 20 ? <Pagination pages={numberPages} nextPage={this.nextPage} CurPage={this.state.CurPage} /> : ''}
-                </div> :<MovieInfo CurMovie={this.state.CurMovie} closeMovieInfo={this.clodeMovieInfo} />
+                </div> :<MovieInfo CurMovie={this.state.CurMovie} CurMovieReviews={this.state.CurMovieReviews} closeMovieInfo={this.closeMovieInfo} />
                 }
             </div>
         );

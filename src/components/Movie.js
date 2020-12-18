@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
-    Card, CardActionArea, CardContent, CardMedia, Typography
+    Card, CardActionArea, CardContent, CardMedia, Typography, Grid
 } from '@material-ui/core';
 import Moment from 'moment';
 import DefaultImg from '../assets/default-placeholder.png';
@@ -39,7 +39,11 @@ const Movie = (props) =>{
                         <Typography gutterBottom variant="caption" style={{fontSize: 12,color: "gray"}}>
                             {Moment(props.date).format("MMM D, YYYY")}
                         </Typography>
-                        <Typography align="center" gutterBottom variant="h6" style={{height: 100, maxHeight: 100}}>{props.title}</Typography>
+                        <Grid container style={{height: 100, maxHeight: 100, overflow: "visible"}} justify="center" alignItems="center">
+                            <Grid item >
+                                <Typography align="center" variant="h6">{props.title}</Typography>
+                            </Grid>
+                        </Grid>
                     </CardContent>
                 </Card>
             </CardActionArea>

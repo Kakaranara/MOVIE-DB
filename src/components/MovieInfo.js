@@ -1,7 +1,7 @@
 import React from 'react'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {
-    Box, Chip, Container, Typography, Button, Grid, 
+    Avatar, Box, Chip, Container, Typography, Button, Grid, 
     Card,CardContent
 } from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
@@ -18,6 +18,7 @@ const useStyles = makeStyles({
 
 const MovieInfo = (props) =>{
     const movie = props.CurMovie;
+    const review = props.CurMovieReviews;
     const classes = useStyles(props);
     let duration = movie.runtime;
     let date = movie.release_date
@@ -28,8 +29,6 @@ const MovieInfo = (props) =>{
                 <ArrowBackIcon/>Go Back
             </Button>
             <Card>
-                
-                    
                 <Box style={{
                     backgroundImage: `URL(http://image.tmdb.org/t/p/original${movie.backdrop_path}`,
                     backgroundRepeat: 'no-repeat',
@@ -41,7 +40,7 @@ const MovieInfo = (props) =>{
                 <CardContent>
                 <Grid container direction="column" style={{padding: 50}}>
                     <Grid container item direction="row" justify="center" spacing={5}>
-                        <Grid item lg={3} xs={6}>
+                        <Grid item lg={3} sm={6} md={4} xs={10}>
                         { 
                             props.CurMovie.poster_path == null ? 
                             <img src={DefaultImg} alt="" className={classes.cover}/> :
@@ -84,35 +83,86 @@ const MovieInfo = (props) =>{
                     </Grid>
                 </Grid>
                 </CardContent>
-                <hr/>
-                <CardContent>
-                    <Grid container style={{paddingLeft: 50, paddingRight: 50, paddingBottom: 20}} flexdirection="row" alignItems="center" justify="center">
-                        <Grid item xs={12}>
-                            <Typography variant="h5" style={{fontWeight:600}} align="center">Production Companies</Typography>
-                            <br/>
-                        </Grid>
-                        <Grid container item xs={12} flexdirection="column" spacing={2} justify="center" alignItems="center">
-                            {
-                                movie.production_companies.map((production, index) =>{
-                                    return(
-                                        <Grid container item key={index} xs={12} md={6} lg={4} flexdirection="row" alignItems="center" justify="center">
-                                            <Grid item xs={12} style={{textAlign: "center"}}>
-                                                {
-                                                    production.logo_path == null ? 
-                                                    <img src={`https://www.atlantawatershed.org/wp-content/uploads/2017/06/default-placeholder.png`} alt="" style={{height: 100, maxHeight: 100}}/> : 
-                                                    <img src={`http://image.tmdb.org/t/p/original${production.logo_path}`} alt="" style={{height: 100, maxHeight: 100, marginTop: "auto", marginBottom: "auto"}}/>
-                                                }
+                {
+                    (review != null && review !== undefined && review !== '' && review.length) ?
+                    <>
+                        <hr/>
+                        <CardContent>
+                            
+                            <Grid container style={{paddingLeft: 50, paddingRight: 50, paddingBottom: 20}} flexdirection="column" alignItems="center" justify="center">
+                                <Grid item xs={12}>
+                                    <Typography variant="h5" style={{fontWeight:600}} align="center">Reviews</Typography>
+                                    <br/>
+                                </Grid>
+                                <Grid container item xs={12} flexdirection="column" spacing={5} justify="center" alignItems="center">
+                                    {
+                                        review.map((review, index) =>{
+                                            return(
+                                                <Grid container item key={index} xs={12} spacing={1} flexdirection="row" justify="center">
+                                                    <Grid container item xs={12} sm={12} md={3} lg={2} spacing={1} flexdirection="row" justify="center" alignItems="center">
+                                                        <Grid item lg={3} md={3}>
+                                                            {
+                                                                review.avatar_path == null ? 
+                                                                <Avatar className={classes.large} alt="" src="https://www.atlantawatershed.org/wp-content/uploads/2017/06/default-placeholder.png"/> :
+                                                                <Avatar className={classes.large} src={`http://image.tmdb.org/t/p/185${review.author_details.avatar_path}`} alt="" style={{maxWidth: '50%', marginTop: "auto", marginBottom: "auto"}}/>
+                                                            }
+                                                        </Grid>
+                                                        <Grid container item xs={12} sm={12} lg={9} md={9} justify="center" alignItems="center">
+                                                            <Grid item lg={12} md={12} sm={12} xs={12}>
+                                                                <Typography variant="body1" align="center"><b>{review.author}</b></Typography>
+                                                            </Grid>
+                                                            <Grid item lg={12} md={12} sm={12} xs={12} style={{textAlign: "center"}}>
+                                                                <Rating value={review.author_details.rating/2} precision={1} max={5} size="small" readOnly/>
+                                                            </Grid>
+                                                        </Grid>
+                                                    </Grid>
+                                                    <Grid item xs={12} md={9} lg={10}>
+                                                        <i><Typography variant="subtitle2" align="justify">"{review.content}"</Typography></i>
+                                                    </Grid>
+                                                </Grid>
+                                            )
+                                        })
+                                    }
+                                </Grid>
+                            </Grid>
+                        </CardContent>
+                    </> : ''
+                }
+                {   
+                    (movie.production_companies.length) ?
+                    <>
+                    <hr/>
+                    <CardContent>
+                        <Grid container style={{paddingLeft: 50, paddingRight: 50, paddingBottom: 20}} flexdirection="row" alignItems="center" justify="center">
+                            <Grid item xs={12}>
+                                <Typography variant="h5" style={{fontWeight:600}} gutterBottom align="center">Production Companies</Typography>
+                                <br/>
+                            </Grid>
+                            <Grid container item xs={12} flexdirection="column" spacing={2} justify="center" alignItems="center">
+                                {
+                                    movie.production_companies.map((production, index) =>{
+                                        return(
+                                            <Grid container item key={index} xs={12} md={6} lg={4} flexdirection="row" alignItems="center" justify="center">
+                                                <Grid item xs={12} style={{textAlign: "center"}}>
+                                                    {
+                                                        production.logo_path == null ? 
+                                                        <img src={`https://www.atlantawatershed.org/wp-content/uploads/2017/06/default-placeholder.png`} alt="" style={{height: 100, maxHeight: 100}}/> : 
+                                                        <img src={`http://image.tmdb.org/t/p/original${production.logo_path}`} alt="" style={{height: '1%', maxHeight: 100, maxWidth: '100%', marginTop: "auto", marginBottom: "auto"}}/>
+                                                    }
+                                                </Grid>
+                                                <Grid item xs={12}>
+                                                    <Typography variant="subtitle1" align="center">{production.name} ({production.origin_country})</Typography>
+                                                </Grid>
                                             </Grid>
-                                            <Grid item xs={12}>
-                                                <Typography variant="subtitle1" align="center">{production.name} ({production.origin_country})</Typography>
-                                            </Grid>
-                                        </Grid>
-                                    )
-                                })
-                            }
+                                        )
+                                    })
+                                }
+                            </Grid>
                         </Grid>
-                    </Grid>
-                </CardContent>
+                    </CardContent>
+                    </>
+                    : ''
+                }
             </Card>
         </Container>
     )

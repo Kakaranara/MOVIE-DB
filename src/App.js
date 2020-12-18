@@ -3,9 +3,12 @@ import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import InboxIcon from '@material-ui/icons/Inbox';
 import MenuIcon from '@material-ui/icons/Menu';
-import PersonIcon from '@material-ui/icons/Person';
+import HomeIcon from '@material-ui/icons/Home';
+import MovieIcon from '@material-ui/icons/Movie';
+import TvIcon from '@material-ui/icons/Tv';
+import PeopleIcon from '@material-ui/icons/People';
+import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 
 import {
@@ -55,7 +58,7 @@ function App() {
                 {/* LINK TO HOME */}
                 <Link to='/' style={linkStyle}>
                   <ListItem button key="Home">
-                    <ListItemIcon>{<PersonIcon />}</ListItemIcon>
+                    <ListItemIcon>{<HomeIcon />}</ListItemIcon>
                     <ListItemText primary="Home" />
                   </ListItem>
                 </Link>
@@ -65,21 +68,21 @@ function App() {
                 {/* LINK TO MOVIES */}
                 <Link to='/movies' style={linkStyle}>
                   <ListItem button key="Movies">
-                    <ListItemIcon>{<InboxIcon />}</ListItemIcon>
+                    <ListItemIcon>{<MovieIcon />}</ListItemIcon>
                     <ListItemText primary="Movies" />
                   </ListItem>
                 </Link>
                 {/* LINK TO TV-SHOWS */}
                 <Link to='/tv-shows' style={linkStyle}>
                   <ListItem button key="TV Shows">
-                    <ListItemIcon>{<InboxIcon />}</ListItemIcon>
+                    <ListItemIcon>{<TvIcon />}</ListItemIcon>
                     <ListItemText primary="TV Shows" />
                   </ListItem>
                 </Link>
                 {/* LINK TO PEOPLES */}
                 <Link to='/peoples' style={linkStyle}>
                   <ListItem button key="Peoples">
-                    <ListItemIcon>{<InboxIcon />}</ListItemIcon>
+                    <ListItemIcon>{<PeopleIcon />}</ListItemIcon>
                     <ListItemText primary="Peoples" />
                   </ListItem>
                 </Link>
@@ -89,7 +92,7 @@ function App() {
                 {/* LINK TO ABOUT US */}
                 <Link to='/aboutUs' style={linkStyle}>
                   <ListItem button key="About Us">
-                    <ListItemIcon>{<PersonIcon />}</ListItemIcon>
+                    <ListItemIcon>{<AssignmentIndIcon />}</ListItemIcon>
                     <ListItemText primary="About Us" />
                   </ListItem>
                 </Link>

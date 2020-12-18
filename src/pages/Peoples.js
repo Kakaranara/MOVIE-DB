@@ -26,15 +26,15 @@ export default class Peoples extends React.Component {
         return (
             <div>
                 <Typography variant="h3" align="center" gutterBottom>Orang Terpopuler</Typography>
-                <Grid container spacing={1} justify="center">
+                <Grid container spacing={1} justify="center" alignItems="center">
                         {this.state.data.map(data =>
-                        <Grid item md={3} xs={12} sm={6} lg={2} key={data.id} style={{marginBottom:'15px'}}>
-                            <PeopleCard 
-                                nama={data.name} 
-                                image={data.profile_path}
-                                popular={data.popularity}    
-                            />
-                        </Grid>
+                            <Grid container item md={3} sm={6} xs={12} lg={2} key={data.id} justify="center" alignItems="center">
+                                <PeopleCard 
+                                    nama={data.name} 
+                                    image={data.profile_path}
+                                    popular={data.popularity}    
+                                />
+                            </Grid>
                         )}
                 </Grid>
 

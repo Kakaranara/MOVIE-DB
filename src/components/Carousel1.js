@@ -80,7 +80,7 @@ function Item(props)
         </Grid>
         <Grid container item xs={5} direction="row" justify="center" alignItems="center">
             <iframe width="1000" height="315" title={`title${props.count}`}
-            src={`https://www.youtube.com/embed/${props.count}?autoplay=1`}>
+            src={`https://www.youtube.com/embed/${props.count}?autoplay=0`}>
             </iframe> 
         </Grid>
         </Grid>
