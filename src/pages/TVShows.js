@@ -2,7 +2,7 @@ import React from 'react';
 import MovieList from '../components/MovieListX';
 import Pagination from '../components/Pagination';
 import MovieInfo from '../components/MovieInfoX';
-import Nav1 from '../components/Nav1';
+import Nav1X from '../components/Nav1X';
 import {FormControl, Grid, InputLabel, Select, MenuItem} from '@material-ui/core';
 export default class myComponent extends React.Component {
 	constructor(){
@@ -41,7 +41,7 @@ handleChange = (e) =>{
         searchTerm: e.target.value
     });
     if(e.target.value !== ""){
-        fetch(`https://api.themoviedb.org/3/search/movie?api_key=${this.apiKey}&query=${e.target.value}`)
+        fetch(`https://api.themoviedb.org/3/search/tv?api_key=${this.apiKey}&language=en-US&page=1&query=${e.target.value}&include_adult=false`)
         .then(data => data.json())
         .then(data => {
             this.setState({movies1: [...data.results]})
@@ -154,7 +154,7 @@ handleChange = (e) =>{
 								</FormControl>
 							</Grid>
 						</Grid>
-						<Nav1 movies1={this.state.movies1} handleSubmit={this.handleSubmit} handleChange={this.handleChange}/>
+						<Nav1X movies1={this.state.movies1} handleSubmit={this.handleSubmit} handleChange={this.handleChange}/>
 						<MovieList viewMovieInfo={this.viewMovieInfo} movies={this.state.movies}/> 
 						{ this.state.pageL > 20 ? <Pagination pages={numberPages} nextPage={this.nextPage} CurPage={this.state.CurPage} /> : ''}
 					</> :
